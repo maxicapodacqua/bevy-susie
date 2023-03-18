@@ -13,16 +13,23 @@ pub fn spawn_enemy(
 
    let win = windows_q.get_single().unwrap();
 
-    // let direction = if random::<bool>() {1.0} else {-1.0};
-    let direction = 1.00;
+    let (spawn_location, direction) = get_random_location_direction(win);
     commands.spawn((
         SpriteBundle {
-            transform: Transform::from_xyz(60.0, win.height() / 2.0, 0.0),
+            transform: Transform::from_xyz(spawn_location, win.height() / 2.0, 0.0),
             texture: assests_server.load("sprites/zombie_walk1.png"),
             ..default()
         },
         Enemy {direction: direction}
     ));
+}
+
+fn get_random_location_direction(win :&Window) -> (f32, f32){
+    return if random::<bool>() {
+        (win.width(), -1.0)
+    } else {
+        (0.0, 1.0)
+    };
 }
 
 
@@ -32,7 +39,7 @@ pub fn move_enemy(
 ){
 
     for (mut tranform, enemy) in enemy_q.iter_mut() {
-        let x_trans = enemy.direction * 28.0 * time.delta_seconds();
+        let x_trans = enemy.direction * 58.0 * time.delta_seconds();
         tranform.translation += Vec3::new(x_trans,0.0  , 0.0) 
     }
 }
