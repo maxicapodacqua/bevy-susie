@@ -13,8 +13,8 @@ pub struct PlayerPlugin;
 impl Plugin for PlayerPlugin {
     fn build(&self, app: &mut App) {
         app.add_event::<AttackEvent>()
-            .add_startup_system(spawn_player)
-            .add_system(player_attack)
-            .add_system(player_attack_animation);
+            .add_systems(Startup, spawn_player)
+            .add_systems(Update, player_attack)
+            .add_systems(Update, player_attack_animation);
     }
 }

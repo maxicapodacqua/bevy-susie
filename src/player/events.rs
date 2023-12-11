@@ -1,4 +1,4 @@
 use bevy::prelude::*;
 
-#[derive(Default)]
+#[derive(Default, Event)]
 pub struct AttackEvent {}

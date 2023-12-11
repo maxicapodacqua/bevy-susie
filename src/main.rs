@@ -8,9 +8,9 @@ use player::PlayerPlugin;
 fn main() {
     App::new()
         .add_plugins(DefaultPlugins)
-        .add_plugin(PlayerPlugin)
-        .add_plugin(EnemyPlugin)
-        .add_startup_system(spawn_camera)
+        .add_plugins(PlayerPlugin)
+        .add_plugins(EnemyPlugin)
+        .add_systems(Startup, spawn_camera)
         .run();
 }
 
